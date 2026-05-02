@@ -3,7 +3,7 @@
 // All frontend logic, API calls & page behaviour
 // ═══════════════════════════════════════════════
 
-const API = 'http://web-production-19f39.up.railway.app/api';
+const API = 'https://web-production-19f39.up.railway.app/api';
 
 // ── STATE ─────────────────────────────────────
 let allStudents  = [];
