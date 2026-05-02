@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduTrack — Sign In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080C14;
+      --surface: #0F1520;
+      --surface2: #172030;
+      --border: #1E2D45;
+      --text: #E4EAF4;
+      --muted: #6A7A95;
+      --accent: #2563EB;
+      --aglow: rgba(37, 99, 235, 0.2);
+      --green: #10B981;
+      --red: #EF4444;
+      --fh: 'Syne', sans-serif;
+      --fb: 'DM Sans', sans-serif;
+    }
+
+    
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      font-family: var(--fb);
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(37, 99, 235, .04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, .04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 350px;
+      background: radial-gradient(ellipse, rgba(37, 99, 235, .1) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-scroll {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 32px 16px 48px;
+      overflow-y: auto;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 440px;
+      animation: up .4s ease;
+    }
+
+    @keyframes up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .brand-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--accent);
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--fh);
+      font-size: 26px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 10px;
+      box-shadow: 0 0 32px var(--aglow);
+    }
+
+    .brand-name {
+      display: block;
+      font-family: var(--fh);
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .brand-sub {
+      display: block;
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px 26px 22px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--surface2);
+      border-radius: 9px;
+      padding: 3px;
+      margin-bottom: 22px;
+    }
+
+    .tab {
+      padding: 8px;
+      text-align: center;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--muted);
+      border-radius: 7px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: var(--fb);
+      transition: all .18s;
+    }
+
+    .tab.active {
+      background: var(--accent);
+      color: white;
+    }
+
+    .form {
+      display: none;
+    }
+
+    .form.active {
+      display: block;
+      animation: fadeIn .2s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    .form-title {
+      font-family: var(--fh);
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .form-sub {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .fld {
+      margin-bottom: 12px;
+    }
+
+    .fld label {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .fld input {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 13px;
+      color: var(--text);
+      font-size: 13.5px;
+      font-family: var(--fb);
+      outline: none;
+      transition: border .18s, box-shadow .18s;
+    }
+
+    .fld input::placeholder {
+      color: var(--muted);
+    }
+
+    .fld input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--aglow);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 11px;
+      border: none;
+      border-radius: 9px;
+      font-family: var(--fb);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .18s;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      opacity: .88;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px var(--aglow);
+    }
+
+    .btn-primary:active {
+      transform: none;
+      opacity: 1;
+    }
+
+    .btn-primary:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, .35);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+      display: none;
+    }
+
+    .loading .spinner {
+      display: block;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .msg {
+      margin-top: 12px;
+      padding: 10px 13px;
+      border-radius: 8px;
+      font-size: 13px;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .msg.success {
+      background: rgba(16, 185, 129, .1);
+      border: 1px solid rgba(16, 185, 129, .25);
+      color: var(--green);
+      display: block;
+    }
+
+    .msg.error {
+      background: rgba(239, 68, 68, .1);
+      border: 1px solid rgba(239, 68, 68, .25);
+      color: var(--red);
+      display: block;
+    }
+
+    .pw-strength {
+      height: 3px;
+      border-radius: 2px;
+      margin-top: 5px;
+      background: var(--border);
+      overflow: hidden;
+    }
+
+    .pw-bar {
+      height: 100%;
+      border-radius: 2px;
+      width: 0%;
+      transition: width .3s, background .3s;
+    }
+
+    .pw-hint {
+      font-size: 10.5px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 16px;
+    }
+
+  
+  </style>
+</head>
+
+<body>
+  <div class="page-scroll">
+    <div class="wrap">
+
+      ```
+      <div class="brand">
+        <div class="brand-icon">E</div>
+        <span class="brand-name">EduTrack</span>
+        <span class="brand-sub">School Report Management System</span>
+      </div>
+
+      <div class="card">
+        <div class="tabs">
+          <button class="tab active" id="tab-login" onclick="switchTab('login')">Sign In</button>
+          <button class="tab" id="tab-signup" onclick="switchTab('signup')">Register</button>
+        </div>
+
+        <!-- LOGIN -->
+        <div class="form active" id="form-login">
+          <div class="form-title">Welcome back</div>
+          <div class="form-sub">Sign in to your teacher account to continue.</div>
+          <div class="fld">
+            <label>Email Address</label>
+            <input type="email" id="l-email" placeholder="teacher@school.edu" autocomplete="email" />
+          </div>
+          <div class="fld">
+            <label>Password</label>
+            <input type="password" id="l-password" placeholder="••••••••" autocomplete="current-password" />
+          </div>
+          <button class="btn btn-primary" id="l-btn" onclick="handleLogin()">
+            <span>Sign In</span>
+            <div class="spinner"></div>
+          </button>
+          <div class="msg" id="l-msg"></div>
+        </div>
+
+        <!-- REGISTER -->
+        <div class="form" id="form-signup">
+          <div class="form-title">Create your account</div>
+          <div class="form-sub">Register as a teacher to start managing student report cards.</div>
+          <div class="two-col">
+            <div class="fld">
+              <label>First Name</label>
+              <input type="text" id="r-first" placeholder="e.g. Amara" />
+            </div>
+            <div class="fld">
+              <label>Last Name</label>
+              <input type="text" id="r-last" placeholder="e.g. Osei" />
+            </div>
+          </div>
+          <div class="fld">
+            <label>Email Address</label>
+            <input type="email" id="r-email" placeholder="teacher@school.edu" />
+          </div>
+          <div class="fld">
+            <label>Class You Teach</label>
+            <input type="text" id="r-class" placeholder="e.g. JSS 3A or JHS 2" />
+          </div>
+          <div class="fld">
+            <label>Password</label>
+            <input type="password" id="r-password" placeholder="Min. 6 characters"
+              oninput="checkStrength(this.value)" />
+            <div class="pw-strength">
+              <div class="pw-bar" id="pw-bar"></div>
+            </div>
+            <div class="pw-hint" id="pw-hint">Enter a password</div>
+          </div>
+          <div class="fld">
+            <label>Confirm Password</label>
+            <input type="password" id="r-confirm" placeholder="Re-enter password" />
+          </div>
+          <button class="btn btn-primary" id="r-btn" onclick="handleSignup()">
+            <span>Create Account</span>
+            <div class="spinner"></div>
+          </button>
+          <div class="msg" id="r-msg"></div>
+        </div>
+      </div>
+
+      <div class="footer">EduTrack v1.0 &nbsp;•&nbsp; School Report Management System</div>
+      ```
+
+    </div>
+  </div>
+
+  <script>
+    const API = 'http://localhost:5000/api';
+
+    // Redirect if already logged in
+    try {
+      if (localStorage.getItem('edutrack_token')) {
+        window.location.href = 'index.html';
+      }
+    } catch (e) { }
+
+    function switchTab(tab) {
+      ['login', 'signup'].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.toggle('active', t === tab);
+        document.getElementById(`form-${t}`).classList.toggle('active', t === tab);
+      });
+      clearMsg('l-msg'); clearMsg('r-msg');
+    }
+
+    function checkStrength(val) {
+      const bar = document.getElementById('pw-bar');
+      const hint = document.getElementById('pw-hint');
+      if (!val) { bar.style.width = '0%'; hint.textContent = 'Enter a password'; hint.style.color = ''; return; }
+      let s = 0;
+      if (val.length >= 6) s++;
+      if (val.length >= 10) s++;
+      if (/[A-Z]/.test(val)) s++;
+      if (/[0-9]/.test(val)) s++;
+      if (/[^A-Za-z0-9]/.test(val)) s++;
+      const lvl = [
+        { w: '20%', c: '#EF4444', t: 'Too weak' },
+        { w: '40%', c: '#F97316', t: 'Weak' },
+        { w: '60%', c: '#F59E0B', t: 'Fair' },
+        { w: '80%', c: '#3B82F6', t: 'Good' },
+        { w: '100%', c: '#10B981', t: 'Strong ✓' },
+      ][Math.max(0, Math.min(s - 1, 4))];
+      bar.style.width = lvl.w; bar.style.background = lvl.c;
+      hint.textContent = lvl.t; hint.style.color = lvl.c;
+    }
+
+    async function handleLogin() {
+      const email = document.getElementById('l-email').value.trim();
+      const password = document.getElementById('l-password').value;
+      const btn = document.getElementById('l-btn');
+      if (!email || !password) { showMsg('l-msg', 'Please fill in all fields.', 'error'); return; }
+      setLoad(btn, true);
+      try {
+        const res = await fetch(`${API}/auth/login`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (data.success) {
+          localStorage.setItem('edutrack_token', data.token);
+          localStorage.setItem('edutrack_user', JSON.stringify(data.user));
+          showMsg('l-msg', '✅ Login successful! Redirecting…', 'success');
+          setTimeout(() => window.location.href = 'index.html', 900);
+        } else {
+          showMsg('l-msg', data.message || 'Login failed.', 'error');
+          setLoad(btn, false);
+        }
+      } catch (e) {
+        showMsg('l-msg', '❌ Cannot connect to server. Is it running on port 5000?', 'error');
+        setLoad(btn, false);
+      }
+    }
+
+    async function handleSignup() {
+      const firstName = document.getElementById('r-first').value.trim();
+      const lastName = document.getElementById('r-last').value.trim();
+      const email = document.getElementById('r-email').value.trim();
+      const className = document.getElementById('r-class').value.trim();
+      const password = document.getElementById('r-password').value;
+      const confirm = document.getElementById('r-confirm').value;
+      const btn = document.getElementById('r-btn');
+
+      if (!firstName || !lastName || !email || !className || !password || !confirm) {
+        showMsg('r-msg', 'Please fill in all fields.', 'error'); return;
+      }
+      if (password.length < 6) {
+        showMsg('r-msg', 'Password must be at least 6 characters.', 'error'); return;
+      }
+      if (password !== confirm) {
+        showMsg('r-msg', 'Passwords do not match.', 'error'); return;
+      }
+
+      setLoad(btn, true);
+      try {
+        const res = await fetch(`${API}/auth/register`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ firstName, lastName, email, password, className })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showMsg('r-msg', '✅ Account created! Switching to Sign In…', 'success');
+          setTimeout(() => {
+            switchTab('login');
+            document.getElementById('l-email').value = email;
+          }, 1500);
+        } else {
+          showMsg('r-msg', data.message || 'Registration failed.', 'error');
+        }
+      } catch (e) {
+        showMsg('r-msg', '❌ Cannot connect to server. Is it running on port 5000?', 'error');
+      } finally {
+        setLoad(btn, false);
+      }
+    }
+
+    function showMsg(id, text, type) {
+      const el = document.getElementById(id);
+      el.textContent = text; el.className = `msg ${type}`;
+    }
+    function clearMsg(id) {
+      const el = document.getElementById(id);
+      el.textContent = ''; el.className = 'msg';
+    }
+    function setLoad(btn, on) {
+      btn.disabled = on;
+      btn.classList.toggle('loading', on);
+    }
+
+    // Enter key support
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Enter') return;
+      document.getElementById('form-login').classList.contains('active')
+        ? handleLogin() : handleSignup();
+    });
+  </script>
+
+</body>
+
+</html>

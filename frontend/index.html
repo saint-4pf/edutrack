@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduTrack — Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- ══════════════════════════════════════════
+     SIDEBAR
+══════════════════════════════════════════ -->
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-mark">E</div>
+            <div>
+                <div class="logo-name">EduTrack</div>
+                <div class="logo-sub">Report System</div>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">MAIN</div>
+            <a class="nav-item active" onclick="showPage('dashboard')" href="#">
+                <span class="ni">⊞</span><span>Dashboard</span>
+            </a>
+            <a class="nav-item" onclick="showPage('students')" href="#">
+                <span class="ni">👤</span><span>Students</span>
+            </a>
+            <a class="nav-item" onclick="showPage('subjects')" href="#">
+                <span class="ni">📚</span><span>Subjects</span>
+            </a>
+            <a class="nav-item" onclick="showPage('scores')" href="#">
+                <span class="ni">✏️</span><span>Enter Scores</span>
+            </a>
+            <a class="nav-item" onclick="showPage('mastersheet')" href="#">
+                <span class="ni">📊</span><span>Mastersheet</span>
+            </a>
+            <a class="nav-item" onclick="showPage('reports')" href="#">
+                <span class="ni">📄</span><span>Reports</span>
+            </a>
+
+            ```
+            <div class="nav-section-label" style="margin-top:20px;">SETTINGS</div>
+            <a class="nav-item" onclick="showPage('term')" href="#">
+                <span class="ni">📅</span><span>Term Settings</span>
+            </a>
+            <a class="nav-item" onclick="showPage('admin')" href="#">
+                <span class="ni">🔐</span><span>Admin</span>
+            </a>
+            ```
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-user" id="sidebar-user">
+                <div class="user-avatar" id="sb-avatar">T</div>
+                <div class="user-info">
+                    <div class="user-name" id="sb-name">Teacher</div>
+                    <div class="user-class" id="sb-class">—</div>
+                </div>
+            </div>
+            <button class="logout-btn" onclick="logout()">⏻ Logout</button>
+        </div>
+    </aside>
+
+    <!-- ══════════════════════════════════════════
+     MAIN
+══════════════════════════════════════════ -->
+
+    <div class="main-wrap">
+        <header class="topbar">
+            <button class="hamburger" onclick="toggleSidebar()">☰</button>
+            <div class="topbar-title" id="topbar-title">Dashboard</div>
+            <div class="topbar-right">
+                <div class="term-chip" id="term-chip">Term 1 • 2024/2025</div>
+            </div>
+        </header>
+
+        <main class="content">
+
+            ```
+            <!-- ═══════════════════════════════════
+     DASHBOARD
+═══════════════════════════════════ -->
+            <div class="page active" id="page-dashboard">
+                <div class="page-hd">
+                    <div>
+                        <h1 class="page-title" id="dash-greeting">Good morning 👋</h1>
+                        <p class="page-sub">Here's your school overview for today.</p>
+                    </div>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-card" style="--c:#2563EB">
+                        <div class="sc-icon">👥</div>
+                        <div>
+                            <div class="sc-val" id="d-students">0</div>
+                            <div class="sc-lbl">Students</div>
+                        </div>
+                    </div>
+                    <div class="stat-card" style="--c:#8B5CF6">
+                        <div class="sc-icon">📚</div>
+                        <div>
+                            <div class="sc-val" id="d-subjects">0</div>
+                            <div class="sc-lbl">Subjects</div>
+                        </div>
+                    </div>
+                    <div class="stat-card" style="--c:#10B981">
+                        <div class="sc-icon">✅</div>
+                        <div>
+                            <div class="sc-val" id="d-scores">0</div>
+                            <div class="sc-lbl">Score Records</div>
+                        </div>
+                    </div>
+                    <div class="stat-card" style="--c:#F59E0B">
+                        <div class="sc-icon">📅</div>
+                        <div>
+                            <div class="sc-val" id="d-term">—</div>
+                            <div class="sc-lbl">Current Term</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-hd">Quick Actions</div>
+                <div class="quick-row">
+                    <button class="quick-card" onclick="showPage('students')"><span>➕</span>Add Student</button>
+                    <button class="quick-card" onclick="showPage('subjects')"><span>📚</span>Manage Subjects</button>
+                    <button class="quick-card" onclick="showPage('scores')"><span>✏️</span>Enter Scores</button>
+                    <button class="quick-card" onclick="showPage('mastersheet')"><span>📊</span>Mastersheet</button>
+                    <button class="quick-card" onclick="showPage('reports')"><span>📄</span>Reports</button>
+                </div>
+
+                <div class="section-hd">Getting Started Guide</div>
+                <div class="guide-list">
+                    <div class="guide-item">
+                        <div class="g-num">1</div>
+                        <div>
+                            <div class="g-title">Configure Term Settings</div>
+                            <div class="g-desc">Go to <b>Term Settings</b> — enter school info, session, term, number on
+                                roll, attendance data, and important dates before anything else.</div>
+                        </div>
+                    </div>
+                    <div class="guide-item">
+                        <div class="g-num">2</div>
+                        <div>
+                            <div class="g-title">Add Subjects</div>
+                            <div class="g-desc">Go to <b>Subjects</b> — add all subjects taught. Each subject is unique
+                                per teacher account.</div>
+                        </div>
+                    </div>
+                    <div class="guide-item">
+                        <div class="g-num">3</div>
+                        <div>
+                            <div class="g-title">Add Students</div>
+                            <div class="g-desc">Go to <b>Students</b> — register each student with their Name, Student
+                                ID, and Class.</div>
+                        </div>
+                    </div>
+                    <div class="guide-item">
+                        <div class="g-num">4</div>
+                        <div>
+                            <div class="g-title">Enter Scores</div>
+                            <div class="g-desc">Go to <b>Enter Scores</b> — search or select a student and subject.
+                                Enter SBA (max 50%) and Exam scores. The system calculates the total automatically.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-item">
+                        <div class="g-num">5</div>
+                        <div>
+                            <div class="g-title">View Mastersheet</div>
+                            <div class="g-desc">Go to <b>Mastersheet</b> — see all students ranked by total score across
+                                all subjects in a class.</div>
+                        </div>
+                    </div>
+                    <div class="guide-item">
+                        <div class="g-num">6</div>
+                        <div>
+                            <div class="g-title">Generate Reports</div>
+                            <div class="g-desc">Go to <b>Reports</b> — search for any student to view and print their
+                                official report card with all details.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ═══════════════════════════════════
+     STUDENTS
+═══════════════════════════════════ -->
+            <div class="page" id="page-students">
+                <div class="page-hd">
+                    <div>
+                        <h1 class="page-title">Students</h1>
+                        <p class="page-sub">Manage all student records.</p>
+                    </div>
+                </div>
+                <div class="info-banner">
+                    💡 <span><b>Tip:</b> Each student needs a unique Student ID. Use a consistent format like
+                        <b>STU-001</b>. The student's name appears exactly as entered on their report card — use full
+                        official names.</span>
+                </div>
+                <div class="two-col">
+                    <div class="card">
+                        <div class="card-title" id="stu-form-title">Add New Student</div>
+                        <div class="fld"><label>Full Name</label><input type="text" id="s-name"
+                                placeholder="e.g. Kofi Mensah" /></div>
+                        <div class="fld"><label>Student ID</label><input type="text" id="s-sid"
+                                placeholder="e.g. STU-2024-001" /></div>
+                        <div class="fld"><label>Class</label><input type="text" id="s-class"
+                                placeholder="e.g. JSS 3A" /></div>
+                        <div class="btn-row">
+                            <button class="btn-p" id="stu-submit-btn" onclick="handleStudentSubmit()">Add
+                                Student</button>
+                            <button class="btn-g" id="stu-cancel-btn" onclick="cancelStudentEdit()"
+                                style="display:none">Cancel</button>
+                        </div>
+                        <div class="msg" id="s-msg"></div>
+                    </div>
+                    <div class="card guide-card">
+                        <div class="card-title">📌 Guidelines</div>
+                        <ul class="gl">
+                            <li>Student IDs must be <b>unique</b> — duplicates are rejected.</li>
+                            <li>Format IDs consistently: <b>STU-2024-001</b>.</li>
+                            <li>Class names must match exactly across the system, e.g. <b>JSS 3A</b>.</li>
+                            <li>Full official names are used on printed report cards.</li>
+                            <li>Deleting a student removes all their associated scores.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card" style="margin-top:22px">
+                    <div class="card-top-row">
+                        <div class="card-title">All Students <span class="badge" id="s-count">0</span></div>
+                        <input class="search-box" id="s-search" placeholder="🔍 Search name, ID, class…"
+                            oninput="filterStudents()" />
+                    </div>
+                    <div class="tbl-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Student ID</th>
+                                    <th>Class</th>
+                                    <th>Added</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="s-tbody">
+                                <tr>
+                                    <td colspan="6" class="empty">Loading…</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ═══════════════════════════════════
+     SUBJECTS
+═══════════════════════════════════ -->
+            <div class="page" id="page-subjects">
+                <div class="page-hd">
+                    <div>
+                        <h1 class="page-title">Subjects</h1>
+                        <p class="page-sub">Manage subjects assigned to your account.</p>
+                    </div>
+                </div>
+                <div class="info-banner">
+                    💡 <span><b>Note:</b> Subjects are unique to your teacher account. No two subjects with the same
+                        name can be created by the same teacher. Subjects appear as columns in the Mastersheet and rows
+                        on report cards.</span>
+                </div>
+                <div class="two-col">
+                    <div class="card">
+                        <div class="card-title" id="subj-form-title">Add New Subject</div>
+                        <div class="fld"><label>Subject Name</label><input type="text" id="subj-name"
+                                placeholder="e.g. Mathematics" /></div>
+                        <div class="fld"><label>Short Code (optional)</label><input type="text" id="subj-code"
+                                placeholder="e.g. MATH" /></div>
+                        <div class="btn-row">
+                            <button class="btn-p" id="subj-submit-btn" onclick="handleSubjectSubmit()">Add
+                                Subject</button>
+                            <button class="btn-g" id="subj-cancel-btn" onclick="cancelSubjectEdit()"
+                                style="display:none">Cancel</button>
+                        </div>
+                        <div class="msg" id="subj-msg"></div>
+                    </div>
+                    <div class="card guide-card">
+                        <div class="card-title">📌 Guidelines</div>
+                        <ul class="gl">
+                            <li>Subject names are <b>unique per teacher</b> — no duplicates allowed.</li>
+                            <li>Use consistent, full names: <b>English Language</b>, not <b>Eng</b>.</li>
+                            <li>Short codes appear in compact views like the Mastersheet.</li>
+                            <li>You can edit or delete subjects that have no scores yet.</li>
+                            <li>Subjects with entered scores are locked from deletion to preserve data.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card" style="margin-top:22px">
+                    <div class="card-top-row">
+                        <div class="card-title">Your Subjects <span class="badge" id="subj-count">0</span></div>
+                    </div>
+                    <div class="tbl-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Subject Name</th>
+                                    <th>Code</th>
+                                    <th>Added</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="subj-tbody">
+                                <tr>
+                                    <td colspan="5" class="empty">No subjects yet.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ═══════════════════════════════════
+     ENTER SCORES
+═══════════════════════════════════ -->
+            <div class="page" id="page-scores">
+                <div class="page-hd">
+                    <div>
+                        <h1 class="page-title">Enter Scores</h1>
+                        <p class="page-sub">Record SBA and Exam scores per student per subject.</p>
+                    </div>
+                </div>
+                <div class="info-banner">
+                    💡 <span><b>Scoring System:</b> SBA (School Based Assessment) is <b>50 marks max</b>. Exam is <b>50
+                            marks max</b>. The system automatically converts the child's exam mark to half — so if a
+                        child scores 80/100 in the exam, the system records <b>40</b>. Total is always out of
+                        <b>100</b>.</span>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Find Student & Subject</div>
+                    <div class="two-col" style="gap:16px">
+                        <div class="fld">
+                            <label>Search or Select Student</label>
+                            <input type="text" id="sc-student-search" placeholder="Type name or ID to search…"
+                                oninput="filterScoreStudents()" />
+                            <select id="sc-student-select" size="4" style="margin-top:8px; display:none;"
+                                onchange="onScoreStudentPick()"></select>
+                            <div id="sc-student-chosen" class="chosen-chip" style="display:none"></div>
+                        </div>
+                        <div class="fld">
+                            <label>Search or Select Subject</label>
+                            <input type="text" id="sc-subject-search" placeholder="Type subject name to search…"
+                                oninput="filterScoreSubjects()" />
+                            <select id="sc-subject-select" size="4" style="margin-top:8px; display:none;"
+                                onchange="onScoreSubjectPick()"></select>
+                            <div id="sc-subject-chosen" class="chosen-chip" style="display:none"></div>
+                        </div>
+                    </div>
+                    <button class="btn-p" style="margin-top:8px" onclick="loadScoreEntry()">Load Score Entry</button>
+                </div>
+<!-- Attendance Step -->
+<div id="attendance-step" style="display:none; margin-top:20px">
+ 
+        <div class="card">
+            <div class="card-title">📅 Student Attendance & Profile</div>
+            <p style="font-size:13px; color:var(--muted); margin-bottom:16px">
+                Enter once per student. This appears on their report card.
+            </p>
+            <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:16px">
+                <div class="fld" style="margin:0">
+                    <label>Days Present</label>
+                    <input type="number" id="sc-days-present" min="0" placeholder="e.g. 58" style="width:120px" />
+                </div>
+                <div id="sc-days-total-label" style="font-size:13px; color:var(--muted); margin-top:18px">
+                    out of — days
+                </div>
+            </div>
+            <div class="fld">
+                <label>Conduct <span style="color:var(--muted);font-size:12px">(behaviour in school)</span></label>
+                <input type="text" id="sc-conduct" placeholder="e.g. SATISFACTORY, EXCELLENT, NEEDS IMPROVEMENT" />
+            </div>
+            <div class="fld">
+                <label>Interest <span style="color:var(--muted);font-size:12px">(what the student likes most)</span></label>
+                <input type="text" id="sc-interest" placeholder="e.g. SCIENCE, READING AND SPELLINGS" />
+            </div>
+            <button class="btn-p" style="margin-top:14px" onclick="saveAttendanceAndContinue()">
+                Save & Continue to Score Entry →
+            </button>
+           
+        <div class="msg" id="att-msg" style="margin-top:10px"></div>
+    </div>
+</div>
+<!-- Profile Saved Banner -->
+<div id="profile-saved-banner" style="display:none; margin-top:16px">
+    <div class="card" style="border-left:4px solid #10B981; padding:12px 16px">
+        <!-- filled dynamically -->
+    </div>
+</div>
+
+                <div class="card" id="score-entry-panel" style="display:none; margin-top:20px">
+                    <div class="card-top-row">
+                        <div class="card-title" id="score-panel-title">Score Entry</div>
+                        <button class="btn-p" onclick="saveScore()">💾 Save Score</button>
+                    </div>
+
+                    <div class="score-breakdown">
+                        <div class="sb-item">
+                            <div class="sb-label">SBA Score</div>
+                            <input type="number" class="score-big-input" id="sc-sba" min="0" max="50" placeholder="0"
+                                oninput="calcScoreTotal()" />
+                            <div class="sb-max">Max: 50</div>
+                        </div>
+                        <div class="sb-plus">+</div>
+                        <div class="sb-item">
+                            <div class="sb-label">Exam Score (out of 100)</div>
+                            <input type="number" class="score-big-input" id="sc-exam-raw" min="0" max="100"
+                                placeholder="0" oninput="calcScoreTotal()" />
+                            <div class="sb-max">Converted to /50</div>
+                        </div>
+                        <div class="sb-plus">=</div>
+                        <div class="sb-item">
+                            <div class="sb-label">Total Score</div>
+                            <div class="score-total-display" id="sc-total">0</div>
+                            <div class="sb-max">Out of 100</div>
+                        </div>
+                       
+                        <div class="sb-grade-wrap">
+                            <div class="sb-label">Grade & Remark</div>
+                            <div id="sc-grade-display" class="grade-big">—</div>
+                            <div id="sc-remark-display" class="remark-display">—</div>
+                        </div>
+                    </div>
+                    <div class="msg" id="sc-msg" style="margin-top:14px"></div>
+                </div>
+
+                <!-- All scores table -->
+                <div class="card" style="margin-top:20px">
+                    <div class="card-top-row">
+                        <div class="card-title">All Entered Scores <span class="badge" id="sc-count">0</span></div>
+                        <input class="search-box" id="sc-table-search" placeholder="🔍 Filter scores…"
+                            oninput="filterScoreTable()" />
+                    </div>
+                    <div class="tbl-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Student</th>
+                                    <th>Subject</th>
+                                    <th>SBA (/50)</th>
+                                    <th>Exam Raw</th>
+                                    <th>Exam (/50)</th>
+                                    <th>Total (/100)</th>
+                                    <th>Grade</th>
+                                    <th>Remark</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sc-tbody">
+                                <tr>
+                                    <td colspan="10" class="empty">No scores entered yet.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ═══════════════════════════════════
+     MASTERSHEET
+═══════════════════════════════════ -->
+            <div class="page" id="page-mastersheet">
+                <div class="page-hd">
+                    <div>
+                        <h1 class="page-title">Mastersheet</h1>
+                        <p class="page-sub">Consolidated class results with rankings.</p>
+                    </div>
+                </div>
+                <div class="info-banner">
+                    💡 <span><b>How it works:</b> Select a class to see all students' scores across every subject.
+                        Students are automatically ranked by total score. 🥇 = 1st, 🥈 = 2nd, 🥉 = 3rd.</span>
+                </div>
+                <div class="card">
+                    <div class="fld" style="max-width:320px">
+                        <label>Select Class</label>
+                        <select id="ms-class" onchange="loadMastersheet()">
+                            <option value="">-- Choose a Class --</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="ms-content" style="display:none; margin-top:20px">
+                    <div class="card">
+                        <div class="card-top-row">
+                            <div class="card-title" id="ms-title">Mastersheet</div>
+                            <button class="btn-g" onclick="window.print()">🖨️ Print</button>
+                        </div>
+                        <div class="tbl-wrap" id="ms-tbl-wrap"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ═══════════════════════════════════
+     REPORTS
+═══════════════════════════════════ -->
+            <div class="page" id="page-reports">
+                <div class="page-hd">
+                    <div>
+                        <h1 class="page-title">Reports</h1>
+                        <p class="page-sub">Generate official student report cards.</p>
+                    </div>
+                </div>
+                <div class="info-banner">
+                    💡 <span><b>How to use:</b> Search by name or Student ID, or pick from the dropdown list. Once a
+                        student is selected their full report card is displayed below. Click <b>Print Report Card</b> to
+                        print or save as PDF.</span>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Find Student</div>
+                    <div class="two-col" style="gap:16px; align-items:end">
+                        <div class="fld">
+                            <label>Search by Name or ID</label>
+                            <input type="text" id="rp-search" placeholder="Type to search…"
+                                oninput="filterReportStudents()" />
+                        </div>
+                        <div class="fld">
+                            <label>Or select from list</label>
+                            <select id="rp-select" onchange="loadReportCard(this.value)">
+                                <option value="">-- Select Student --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="rp-search-results" style="margin-top:12px"></div>
+                </div>
+
+                <!-- REPORT CARD -->
+                <div id="rp-preview" style="display:none; margin-top:24px">
+                    <div class="report-card" id="report-card-print">
+                        <!-- HEADER -->
+                        <div class="rc-header">
+                            <div class="rc-crest">
+                                <div class="crest-circle" id="rc-crest-wrap">
+                                    <span id="rc-crest-initial">E</span>
+                                </div>
+                            </div>
+                            <div class="rc-school-info">
+                                <div class="rc-school-name" id="rc-school-name">SCHOOL NAME</div>
+                                <div class="rc-school-address" id="rc-school-address">School Address</div>
+                                <div class="rc-school-contacts" id="rc-school-contacts">Tel: —</div>
+                                <div class="rc-school-pobox" id="rc-school-pobox"></div>
+                            </div>
+                        </div>
+                        <div class="rc-divider"></div>
+                        <div class="rc-card-title">ACADEMIC REPORT SHEET</div>
+
+                        <!-- BIO ROW -->
+                        <div class="rc-bio">
+                            <div class="rc-bio-item"><span class="rc-bio-label">Student Name:</span> <span
+                                    class="rc-bio-val" id="rc-name">—</span></div>
+                            
+                            <div class="rc-bio-item"><span class="rc-bio-label">Class:</span> <span class="rc-bio-val"
+                                    id="rc-class">—</span></div>
+                            <div class="rc-bio-item"><span class="rc-bio-label">No. on Roll:</span> <span
+                                    class="rc-bio-val" id="rc-roll">—</span></div>
+                            <div class="rc-bio-item"><span class="rc-bio-label">Term:</span> <span class="rc-bio-val"
+                                    id="rc-term">—</span></div>
+                            
+                            <div class="rc-bio-item"><span class="rc-bio-label">Attendance:</span> <span
+                                    class="rc-bio-val" id="rc-attendance">—</span></div>
+                            <div class="rc-bio-item"><span class="rc-bio-label">Term Closes:</span> <span
+                                    class="rc-bio-val" id="rc-closes">—</span></div>
+                            <div class="rc-bio-item"><span class="rc-bio-label">Next Resumption:</span> <span
+                                    class="rc-bio-val" id="rc-resumes">—</span></div>
+                            <div class="rc-bio-item"><span class="rc-bio-label">Class Rank:</span> <span
+                                    class="rc-bio-val" id="rc-rank">—</span></div>
+                        </div>
+
+                        <!-- SCORES TABLE -->
+                        <table class="rc-table">
+                            <thead>
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>SBA (50%)</th>
+                                    <th>Exam (50%)</th>
+                                    <th>Total (100%)</th>
+                                    <th>Grade</th>
+                                    <th>Remark</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rc-tbody"></tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3"><b>Grand Total</b></td>
+                                    <td><b id="rc-grand-total">—</b></td>
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Average Score</b></td>
+                                    <td><b id="rc-average">—</b></td>
+                                    <td colspan="2"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <!-- Conduct & Interest -->
+                        <div class="rc-conduct-row">
+                            <span class="rc-bio-label">Conduct:</span>
+                            <span id="rc-conduct">—</span>
+                        </div>
+                        <div class="rc-conduct-row">
+                            <span class="rc-bio-label">Interest:</span>
+                            <span id="rc-interest">—</span>
+                        </div>
+                        
+                        <!-- Remarks boxes -->
+                        <div class="rc-remark-box">
+                            <div class="rc-remark-title">Class Teacher's Remarks:</div>
+                            <div id="rc-teacher-remark">—</div>
+                        </div>
+                        <div class="rc-remark-box">
+                            <div class="rc-remark-title">Headmaster's Remarks:</div>
+                            <div id="rc-head-remark">—</div>
+                        </div>
+
+                        <!-- GRADING KEY -->
+                        <div class="rc-grading-key">
+                            <div class="gk-title">GRADING KEY</div>
+                            <div class="gk-row">
+                                <span>90–100: <b>Excellent</b></span>
+                                <span>80–89: <b>Highly Proficient</b></span>
+                                <span>70–79: <b>Proficient</b></span>
+                                <span>60–69: <b>Approaching Proficiency</b></span>
+                                <span>50–59: <b>Average</b></span>
+                                <span>40–49: <b>Needs Assistance</b></span>
+                                <span>30–39: <b>Below Average</b></span>
+                                <span>20–29: <b>Poor</b></span>
+                                <span>10–19: <b>Very Poor</b></span>
+                                <span>0–9: <b>Fail</b></span>
+                            </div>
+                        </div>
+
+                        <!-- SIGNATURES -->
+                        <div class="rc-signatures">
+                            <div class="sig-block">
+                                <div class="sig-line"></div>
+                                <div>Class Teacher's Signature</div>
+                            </div>
+                            <div class="sig-block">
+                                <div class="sig-line"></div>
+                                <div>Principal's Signature</div>
+                            </div>
+                            <div class="sig-block">
+                                <div class="sig-line"></div>
+                                <div>Parent/Guardian's Signature</div>
+                            </div>
+                        </div>
+                    </div>
+<div style="text-align:center;margin-top:20px;display:flex;gap:12px;justify-content:center">
+    <button class="btn-g" onclick="downloadReportAsPDF()">💾 Download PDF</button>
+    <button class="btn-p" onclick="window.print()">🖨️ Print Report Card</button>
+</div>
+                    
+                </div>
+            </div>
+
+
+            <!-- ═══════════════════════════════════
+     TERM SETTINGS
+═══════════════════════════════════ -->
+            <div class="page" id="page-term">
+                <div class="page-hd">
+                    <div>
+                        <h1 class="page-title">Term Settings</h1>
+                        <p class="page-sub">Configure academic period, school info and attendance.</p>
+                    </div>
+                </div>
+                <div class="info-banner" style="--bc:rgba(245,158,11,0.15); --bbc:rgba(245,158,11,0.3)">
+                    ⚠️ <span><b>Set this up first!</b> Term Settings are used on every report card. Configure before
+                        entering any scores. You can update these at the start of each term.</span>
+                </div>
+
+                <div class="two-col">
+                    <div class="card">
+                        <div class="card-title">🏫 School Information</div>
+                        <div class="fld"><label>School Name</label><input type="text" id="ts-school-name"
+                                placeholder="e.g. Excel Academy" /></div>
+                        <div class="fld"><label>School Address</label><input type="text" id="ts-address"
+                                placeholder="e.g. 12 School Road, Kumasi" /></div>
+                        <div class="fld"><label>P.O. Box</label><input type="text" id="ts-pobox"
+                                placeholder="e.g. P.O. Box 234, Kumasi" /></div>
+                        <div class="fld"><label>Phone Numbers (comma-separated)</label><input type="text" id="ts-phones"
+                                placeholder="e.g. 024-000-0000, 030-000-0000" /></div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">📅 Academic Period</div>
+                        <div class="fld"><label>Academic Session</label><input type="text" id="ts-session"
+                                placeholder="e.g. 2024/2025" /></div>
+                        <div class="fld"><label>Current Term</label>
+                            <select id="ts-term">
+                                <option value="1st Term">1st Term</option>
+                                <option value="2nd Term">2nd Term</option>
+                                <option value="3rd Term">3rd Term</option>
+                            </select>
+                        </div>
+                        <div class="fld"><label>Number on Roll</label><input type="number" id="ts-roll" min="1"
+                                placeholder="e.g. 35" /></div>
+                        <div class="fld"><label>Total School Days This Term</label><input type="number"
+                                id="ts-school-days" placeholder="e.g. 65" /></div>
+                    </div>
+                </div>
+
+                <div class="two-col" style="margin-top:20px">
+                    <div class="card">
+                        <div class="card-title">📆 Important Dates</div>
+                        <div class="fld"><label>Date Term Closes</label><input type="date" id="ts-closes" /></div>
+                        <div class="fld"><label>Date of Next Term Resumption</label><input type="date"
+                                id="ts-resumes" /></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">📊 Grading Scale</div>
+                        <table class="grade-tbl">
+                            <thead>
+                                <tr>
+                                    <th>Range</th>
+                                    <th>Grade</th>
+                                    <th>Remark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>90–100</td>
+                                    <td><span class="gb s-a">A+</span></td>
+                                    <td>Excellent</td>
+                                </tr>
+                                <tr>
+                                    <td>80–89</td>
+                                    <td><span class="gb s-a">A</span></td>
+                                    <td>Highly Proficient</td>
+                                </tr>
+                                <tr>
+                                    <td>70–79</td>
+                                    <td><span class="gb s-b">B</span></td>
+                                    <td>Proficient</td>
+                                </tr>
+                                <tr>
+                                    <td>60–69</td>
+                                    <td><span class="gb s-c">C</span></td>
+                                    <td>Approaching Proficiency</td>
+                                </tr>
+                                <tr>
+                                    <td>50–59</td>
+                                    <td><span class="gb s-c">C-</span></td>
+                                    <td>Average</td>
+                                </tr>
+                                <tr>
+                                    <td>40–49</td>
+                                    <td><span class="gb s-d">D</span></td>
+                                    <td>Needs Assistance</td>
+                                </tr>
+                                <tr>
+                                    <td>30–39</td>
+                                    <td><span class="gb s-e">E</span></td>
+                                    <td>Below Average</td>
+                                </tr>
+                                <tr>
+                                    <td>20–29</td>
+                                    <td><span class="gb s-f">F</span></td>
+                                    <td>Poor</td>
+                                </tr>
+                                <tr>
+                                    <td>10–19</td>
+                                    <td><span class="gb s-f">F-</span></td>
+                                    <td>Very Poor</td>
+                                </tr>
+                                <tr>
+                                    <td>0–9</td>
+                                    <td><span class="gb s-f">F--</span></td>
+                                    <td>Fail</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div style="margin-top:20px">
+                    <button class="btn-p" onclick="saveTermSettings()">💾 Save Term Settings</button>
+                    <div class="msg" id="ts-msg" style="margin-top:12px; max-width:400px"></div>
+                </div>
+            </div>
+
+
+            <!-- ═══════════════════════════════════
+     ADMIN
+═══════════════════════════════════ -->
+            <div class="page" id="page-admin">
+                <div class="page-hd">
+                    <div>
+                        <h1 class="page-title">Admin Panel</h1>
+                        <p class="page-sub">Elevated system access and control.</p>
+                    </div>
+                </div>
+
+                <!-- Admin Auth Gate -->
+                <div id="admin-gate" class="card" style="max-width:480px">
+                    <div class="card-title">🔐 Admin Authentication Required</div>
+                    <p style="font-size:13px; color:var(--muted); margin-bottom:20px; line-height:1.6">
+                        This panel requires admin credentials. Only the designated admin account can access these
+                        controls. Enter the admin email and password to proceed.
+                    </p>
+                    <div class="fld"><label>Admin Email</label><input type="email" id="adm-email"
+                            placeholder="admin@school.edu" /></div>
+                    <div class="fld"><label>Admin Password</label><input type="password" id="adm-password"
+                            placeholder="••••••••" /></div>
+                    <button class="btn-p" onclick="authenticateAdmin()">Unlock Admin Panel</button>
+                    <div class="msg" id="adm-auth-msg" style="margin-top:12px"></div>
+                </div>
+
+                <!-- Admin Panel (hidden until auth) -->
+                <div id="admin-panel" style="display:none">
+                    <div class="info-banner" style="--bc:rgba(239,68,68,0.1); --bbc:rgba(239,68,68,0.3); color:#FCA5A5">
+                        🔐 <span><b>Admin Mode Active.</b> You have full system privileges. All actions here are
+                            permanent and cannot be undone.</span>
+                    </div>
+
+                    <div class="section-hd">System Overview</div>
+                    <div class="stats-row">
+                        <div class="stat-card" style="--c:#2563EB">
+                            <div class="sc-icon">👥</div>
+                            <div>
+                                <div class="sc-val" id="adm-s">0</div>
+                                <div class="sc-lbl">Students</div>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="--c:#8B5CF6">
+                            <div class="sc-icon">👩‍🏫</div>
+                            <div>
+                                <div class="sc-val" id="adm-t">0</div>
+                                <div class="sc-lbl">Teachers</div>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="--c:#10B981">
+                            <div class="sc-icon">📚</div>
+                            <div>
+                                <div class="sc-val" id="adm-subj">0</div>
+                                <div class="sc-lbl">Subjects</div>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="--c:#F59E0B">
+                            <div class="sc-icon">✅</div>
+                            <div>
+                                <div class="sc-val" id="adm-sc">0</div>
+                                <div class="sc-lbl">Score Records</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- LOGO UPLOAD CARD -->
+                    <div class="card" style="margin-bottom:20px">
+                        <div class="card-title">🏫 School Crest / Logo</div>
+                        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6">
+                            Upload your school crest. It appears on all report cards when printed or downloaded.
+                            PNG recommended. Max 500KB.
+                        </p>
+                        <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">
+                            <div style="text-align:center" id="logo-preview-wrap">
+                                <div style="width:90px;height:90px;border-radius:50%;border:2px dashed var(--border);
+                            display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:28px">🏫</div>
+                                <p style="font-size:11px;color:var(--muted);margin-top:6px">No logo yet</p>
+                            </div>
+                            <div onclick="document.getElementById('logo-file-input').click()" id="logo-dropzone"
+                                ondragover="event.preventDefault();this.style.borderColor='var(--accent)'"
+                                ondragleave="this.style.borderColor='var(--border)'"
+                                ondrop="event.preventDefault();handleLogoFile(event.dataTransfer.files[0])" style="flex:1;min-width:200px;border:2px dashed var(--border);border-radius:10px;
+                            padding:24px 20px;text-align:center;cursor:pointer;background:var(--surface2);
+                            transition:all .18s">
+                                <div style="font-size:28px;margin-bottom:8px">📁</div>
+                                <div style="font-size:13.5px;font-weight:500">Click to browse or drag & drop</div>
+                                <div style="font-size:12px;color:var(--muted);margin-top:4px">PNG, JPG, SVG — max 500KB</div>
+                                <input type="file" id="logo-file-input" accept="image/*" style="display:none"
+                                    onchange="handleLogoFile(this.files[0])" />
+                            </div>
+                        </div>
+                        <div class="msg" id="logo-msg" style="margin-top:12px"></div>
+                    </div>
+
+                    <div class="section-hd" style="margin-top:28px">All Teachers</div>
+                    <div class="card">
+                        <div class="card-top-row">
+                            <div class="card-title">Registered Teachers</div>
+                            <button class="btn-g" onclick="loadAdminData()">🔄 Refresh</button>
+                        </div>
+                        <div class="tbl-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Class</th>
+                                        <th>Role</th>
+                                        <th>Joined</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adm-teachers-tbody">
+                                    <tr>
+                                        <td colspan="7" class="empty">Loading…</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="section-hd" style="margin-top:28px">Danger Zone</div>
+                    <div class="card danger-card">
+                        <div class="card-title" style="color:#EF4444">⚠️ Irreversible Actions</div>
+                        <div class="danger-actions">
+                            <div class="danger-item">
+                                <div>
+                                    <div class="danger-title">Clear All Scores</div>
+                                    <div class="danger-desc">Permanently deletes all score records across all teachers
+                                        and students.</div>
+                                </div>
+                                <button class="btn-danger" onclick="adminClearScores()">Clear All Scores</button>
+                            </div>
+                            <div class="danger-item">
+                                <div>
+                                    <div class="danger-title">Clear All Students</div>
+                                    <div class="danger-desc">Permanently deletes all student records and their
+                                        associated scores.</div>
+                                </div>
+                                <button class="btn-danger" onclick="adminClearStudents()">Clear All Students</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top:20px">
+                        <div class="card-title">📌 Admin Guidelines</div>
+                        <ul class="gl">
+                            <li>The admin account is created at the backend level with the <b>role: "admin"</b> field
+                                set to true.</li>
+                            <li>Only one account should have admin privileges at a time.</li>
+                            <li>Admin can view and manage all teachers registered in the system.</li>
+                            <li>The <b>Danger Zone</b> actions are permanent — always export data first.</li>
+                            <li>Term settings affect all report cards system-wide — coordinate with all teachers before
+                                changing.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            ```
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
